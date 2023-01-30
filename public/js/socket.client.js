@@ -47,8 +47,8 @@ btnEnviar.addEventListener('click', () => {
     }
 
     // emit para enviar mensaje al socket (al servidor)
+    // nombre del mensaje, informacion, callback cuando termina la operacion
     socket.emit('enviar-mensaje', payload, ( id ) => {
-        console.log(payload);
         console.log('desde el server', id);
     });
 

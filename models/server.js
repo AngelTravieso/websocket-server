@@ -1,5 +1,6 @@
 const cors = require('cors');
 const express = require('express');
+const { socketController } = require('../sockets/controller');
 
 
 class Server {
@@ -31,37 +32,11 @@ class Server {
     }
 
     routes() {
-        // Middleware condicional
         // this.app.use(this.paths.auth, require('../routes/auth'));
     }
 
     socket() {
-        this.io.on("connection", socket => {
-            console.log('Cliente conectado', socket.id); // ID del socket
-
-            // Emitir mensaje al cliente
-            socket.on('disconnect', () => {
-                console.log('Cliente desconectado');
-            });
-
-            // Recibir mensaje del cliente
-            socket.on('enviar-mensaje', (payload, callback) => {
-                // Mensaje recibido del cliente
-                // console.log(payload);
-
-                // Emitir mensaje a los clientes conectados
-                // se recomienda que sean objetos literales
-                this.io.emit('enviar-mensaje', payload);
-
-                const id = 123456789;
-                callback({
-                    id,
-                    fecha: new Date().getTime()
-                });
-
-            });
-
-        });
+        this.io.on("connection", socketController);
     }
 
     listen() {
