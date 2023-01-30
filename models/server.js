@@ -45,12 +45,19 @@ class Server {
             });
 
             // Recibir mensaje del cliente
-            socket.on('enviar-mensaje', (payload) => {
+            socket.on('enviar-mensaje', (payload, callback) => {
                 // Mensaje recibido del cliente
                 // console.log(payload);
 
                 // Emitir mensaje a los clientes conectados
-                this.io.emit('enviar-mensaje', payload); // se recomienda que sean objetos literales
+                // se recomienda que sean objetos literales
+                this.io.emit('enviar-mensaje', payload);
+
+                const id = 123456789;
+                callback({
+                    id,
+                    fecha: new Date().getTime()
+                });
 
             });
 
