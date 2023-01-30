@@ -46,7 +46,12 @@ class Server {
 
             // Recibir mensaje del cliente
             socket.on('enviar-mensaje', (payload) => {
-                console.log(payload);
+                // Mensaje recibido del cliente
+                // console.log(payload);
+
+                // Emitir mensaje a los clientes conectados
+                this.io.emit('enviar-mensaje', payload); // se recomienda que sean objetos literales
+
             });
 
         });

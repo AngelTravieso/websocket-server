@@ -9,6 +9,8 @@ const btnEnviar = document.querySelector('#btnEnviar');
 // Iniciar socket (cliente)
 const socket = io();
 
+// * Eventos de socket io
+
 // on para escuchar eventos
 socket.on('connect', () => { // connect cuando se conecta al socket
     console.log('Conectado');
@@ -28,7 +30,12 @@ socket.on('disconnect', () => { // disconnect cuando se conecta al socket
 
 });
 
-// Eventos JS
+
+socket.on('enviar-mensaje', (payload) => {
+    console.log(payload);
+});
+
+// * Eventos JS
 btnEnviar.addEventListener('click', () => {
     const mensaje = txtMensaje.value;
 
